@@ -1,0 +1,76 @@
+NAME
+    Validation::Class::Domain - Data Validation for Hierarchical Data
+
+VERSION
+    version 0.000001
+
+SYNOPSIS
+        package MyApp::Person;
+
+        use Validation::Class::Domain;
+
+        field  'id';
+        field  'title';
+        field  'rating';
+
+        field  'name' => {
+            mixin     => ':str',
+            pattern   => qr/^(?!evil)/
+        };
+
+        domain 'person' => {
+            'id'                                   => 'id',
+            'name'                                 => 'name',
+            'title'                                => 'title',
+            'company.name'                         => 'name',
+            'company.supervisor.name'              => 'name',
+            'company.supervisor.rating.@.support'  => 'rating',
+            'company.supervisor.rating.@.guidance' => 'rating',
+            'company.tags.@'                       => 'name'
+        };
+
+        package main;
+
+        my $data = {
+            "id"      => "1234-ABC",
+            "name"    => "Anita Campbell-Green",
+            "title"   => "Designer",
+            "company" => {
+                "name"       => "House of de Vil",
+                "supervisor" => {
+                    "name"   => "Cruella de Vil",
+                    "rating" => [
+                        {   "support"  => -9,
+                            "guidance" => -9
+                        }
+                    ]
+                },
+                "tags" => [
+                    "evil",
+                    "cruelty",
+                    "dogs"
+                ]
+            },
+        };
+
+        my $person = MyApp::Person->new;
+
+        unless ($person->validate_domain(person => $data)) {
+            warn $person->errors_to_string if $person->error_count;
+        }
+
+DESCRIPTION
+    This module allows you to validate hierarchical structures using the
+    Validation::Class framework. This is an experimental yet highly
+    promising and approach toward the consistent processing of structures.
+    This module was inspired by MooseX::Validation::Doctypes.
+
+AUTHOR
+    Al Newkirk <anewkirk@ana.io>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2013 by Al Newkirk.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
