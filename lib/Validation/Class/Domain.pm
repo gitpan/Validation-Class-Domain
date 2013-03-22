@@ -6,7 +6,7 @@ use utf8;
 use strict;
 use warnings;
 
-use Validation::Class::Simple;
+use Validation::Class ();
 use Validation::Class::Exporter;
 use Validation::Class::Mapping;
 
@@ -153,7 +153,7 @@ Validation::Class::Domain - Data Validation for Hierarchical Data
 
 =head1 VERSION
 
-version 0.000001
+version 0.000002
 
 =head1 SYNOPSIS
 
@@ -215,7 +215,7 @@ version 0.000001
 
 This module allows you to validate hierarchical structures using the
 L<Validation::Class> framework. This is an experimental yet highly promising
-and approach toward the consistent processing of structures. This module was
+approach toward the consistent processing of nested structures. This module was
 inspired by L<MooseX::Validation::Doctypes>.
 
 =head1 AUTHOR

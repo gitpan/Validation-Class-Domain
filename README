@@ -2,7 +2,7 @@ NAME
     Validation::Class::Domain - Data Validation for Hierarchical Data
 
 VERSION
-    version 0.000001
+    version 0.000002
 
 SYNOPSIS
         package MyApp::Person;
@@ -62,8 +62,8 @@ SYNOPSIS
 DESCRIPTION
     This module allows you to validate hierarchical structures using the
     Validation::Class framework. This is an experimental yet highly
-    promising and approach toward the consistent processing of structures.
-    This module was inspired by MooseX::Validation::Doctypes.
+    promising approach toward the consistent processing of nested
+    structures. This module was inspired by MooseX::Validation::Doctypes.
 
 AUTHOR
     Al Newkirk <anewkirk@ana.io>

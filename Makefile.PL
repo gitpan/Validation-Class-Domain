@@ -23,7 +23,7 @@ my %WriteMakefileArgs = (
     "Hash::Flatten" => 0,
     "Validation::Class" => 0
   },
-  "VERSION" => "0.000001",
+  "VERSION" => "0.000002",
   "test" => {
     "TESTS" => "t/*.t"
   }

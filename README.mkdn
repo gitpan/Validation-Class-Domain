@@ -4,7 +4,7 @@ Validation::Class::Domain - Data Validation for Hierarchical Data
 
 # VERSION
 
-version 0.000001
+version 0.000002
 
 # SYNOPSIS
 
@@ -66,7 +66,7 @@ version 0.000001
 
 This module allows you to validate hierarchical structures using the
 [Validation::Class](http://search.cpan.org/perldoc?Validation::Class) framework. This is an experimental yet highly promising
-and approach toward the consistent processing of structures. This module was
+approach toward the consistent processing of nested structures. This module was
 inspired by [MooseX::Validation::Doctypes](http://search.cpan.org/perldoc?MooseX::Validation::Doctypes).
 
 # AUTHOR
