@@ -95,24 +95,25 @@ sub domain_validates { goto &validate_domain } sub validate_domain {
 
         for my $regex (keys %{$domain}) {
 
-            if (defined $_data->{$key}) {
+            if (exists $_data->{$key}) {
+
+                my  $field = $domain->{$regex};
+                my  $point = $key;
+                    $point =~ s/\W/_/g;
+                my  $label = $key;
+                    $label =~ s/\:/./g;
 
                 if ($key =~ /^$regex$/) {
 
-                    my  $field = $domain->{$regex};
-                    my  $point = $key;
-                        $point =~ s/\W/_/g;
-                    my  $label = $key;
-                        $label =~ s/\:/./g;
-
-                    $proto->params->add($point => $_data->{$key});
                     $proto->clone_field($field => $point, {label => $label});
-                    $proto->queue("+$point"); # queue and force requirement
 
                     $_dmap->{$key}   = 1;
                     $_pmap->{$point} = $key;
 
                 }
+
+                $proto->params->add($point => $_data->{$key});
+                $proto->queue("+$point"); # queue and force requirement
 
             }
 
@@ -120,10 +121,10 @@ sub domain_validates { goto &validate_domain } sub validate_domain {
 
     }
 
-    $_dmap = unflatten $_dmap;
-
     my $result = $proto->validate($self);
     my @errors = $proto->get_errors;
+
+    $_dmap = unflatten $_dmap;
 
     while (my($point, $key) = each(%{$_pmap})) {
         $_data->{$key} = $proto->params->get($point); # prepare data
@@ -153,7 +154,7 @@ Validation::Class::Domain - Data Validation for Hierarchical Data
 
 =head1 VERSION
 
-version 0.000002
+version 0.000003
 
 =head1 SYNOPSIS
 

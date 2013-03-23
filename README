@@ -2,7 +2,7 @@ NAME
     Validation::Class::Domain - Data Validation for Hierarchical Data
 
 VERSION
-    version 0.000002
+    version 0.000003
 
 SYNOPSIS
         package MyApp::Person;
