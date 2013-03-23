@@ -154,7 +154,7 @@ Validation::Class::Domain - Data Validation for Hierarchical Data
 
 =head1 VERSION
 
-version 0.000003
+version 0.000004
 
 =head1 SYNOPSIS
 
@@ -162,24 +162,31 @@ version 0.000003
 
     use Validation::Class::Domain;
 
-    field  'id';
-    field  'title';
-    field  'rating';
+    field  'id' => {
+        mixin      => [':str'],
+        filters    => ['numeric'],
+        max_length => 2,
+    };
 
     field  'name' => {
-        mixin     => ':str',
-        pattern   => qr/^(?!evil)/
+        mixin      => [':str'],
+        pattern    => qr/^[A-Za-z ]+$/,
+        max_length => 20,
+    };
+
+    field  'tag' => {
+        mixin      => [':str'],
+        pattern    => qr/^(?!evil)\w+/,
+        max_length => 20,
     };
 
     domain 'person' => {
-        'id'                                   => 'id',
-        'name'                                 => 'name',
-        'title'                                => 'title',
-        'company.name'                         => 'name',
-        'company.supervisor.name'              => 'name',
-        'company.supervisor.rating.@.support'  => 'rating',
-        'company.supervisor.rating.@.guidance' => 'rating',
-        'company.tags.@'                       => 'name'
+        'id'                             => 'id',
+        'name'                           => 'name',
+        'company.name'                   => 'name',
+        'company.supervisor.name'        => 'name',
+        'company.supervisor.rating.@.*'  => 'rating',
+        'company.tags.@'                 => 'name'
     };
 
     package main;
@@ -216,8 +223,14 @@ version 0.000003
 
 This module allows you to validate hierarchical structures using the
 L<Validation::Class> framework. This is an experimental yet highly promising
-approach toward the consistent processing of nested structures. This module was
-inspired by L<MooseX::Validation::Doctypes>.
+approach toward the consistent processing of nested structures. The current
+interface is not expected to change. This module was inspired by
+L<MooseX::Validation::Doctypes>.
+
+Gone are the days of data submitted to an application in key/value form and
+especially in regards to the increasing demand for communication between
+applications, serializing and transmitting structured data over a network
+connection.
 
 =head1 AUTHOR
 
