@@ -154,7 +154,7 @@ Validation::Class::Domain - Data Validation for Hierarchical Data
 
 =head1 VERSION
 
-version 0.000004
+version 0.000005
 
 =head1 SYNOPSIS
 
@@ -172,6 +172,11 @@ version 0.000004
         mixin      => [':str'],
         pattern    => qr/^[A-Za-z ]+$/,
         max_length => 20,
+    };
+
+    field  'rating' => {
+        mixin      => [':str'],
+        pattern    => qr/^\-?\d+$/,
     };
 
     field  'tag' => {
@@ -225,12 +230,10 @@ This module allows you to validate hierarchical structures using the
 L<Validation::Class> framework. This is an experimental yet highly promising
 approach toward the consistent processing of nested structures. The current
 interface is not expected to change. This module was inspired by
-L<MooseX::Validation::Doctypes>.
-
-Gone are the days of data submitted to an application in key/value form and
-especially in regards to the increasing demand for communication between
-applications, serializing and transmitting structured data over a network
-connection.
+L<MooseX::Validation::Doctypes>. Gone are the days of data submitted to an
+application in key/value form and especially in regards to the increasing demand
+for communication between applications, serializing and transmitting structured
+data over a network connection.
 
 =head1 AUTHOR
 

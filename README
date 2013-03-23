@@ -2,7 +2,7 @@ NAME
     Validation::Class::Domain - Data Validation for Hierarchical Data
 
 VERSION
-    version 0.000004
+    version 0.000005
 
 SYNOPSIS
         package MyApp::Person;
@@ -19,6 +19,11 @@ SYNOPSIS
             mixin      => [':str'],
             pattern    => qr/^[A-Za-z ]+$/,
             max_length => 20,
+        };
+
+        field  'rating' => {
+            mixin      => [':str'],
+            pattern    => qr/^\-?\d+$/,
         };
 
         field  'tag' => {
@@ -71,12 +76,10 @@ DESCRIPTION
     Validation::Class framework. This is an experimental yet highly
     promising approach toward the consistent processing of nested
     structures. The current interface is not expected to change. This module
-    was inspired by MooseX::Validation::Doctypes.
-
-    Gone are the days of data submitted to an application in key/value form
-    and especially in regards to the increasing demand for communication
-    between applications, serializing and transmitting structured data over
-    a network connection.
+    was inspired by MooseX::Validation::Doctypes. Gone are the days of data
+    submitted to an application in key/value form and especially in regards
+    to the increasing demand for communication between applications,
+    serializing and transmitting structured data over a network connection.
 
 AUTHOR
     Al Newkirk <anewkirk@ana.io>
